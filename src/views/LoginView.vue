@@ -91,7 +91,7 @@ export default {
 
 <style>
 html {
-    background-color: #56baed;
+    background-color: #fff;
 }
 
 body {
