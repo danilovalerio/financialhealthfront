@@ -22,3 +22,11 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## Project Planning
+
+### LoginView
+- Cadastrar: realizar o cadastro passando os dados necessários
+- Informar usuario, senha e logar
+  - SUCESSO: Vai para home
+  - ERRO: Exibe mensagem na tela o provavel erro
