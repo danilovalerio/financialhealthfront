@@ -2,11 +2,12 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
+    loggedIn: false,
     userLogged: {
       login: "",
       name: ""
     },
-    loggedIn: false
+    token: "",  
   },
   getters: {
   },
@@ -20,10 +21,12 @@ export default createStore({
       state.loggedIn = true
       state.userLogged.login = dado.usuario.email
       state.userLogged.name = dado.usuario.nome.split(" ")[0]
+      state.token = dado.token
 
       console.log("Após logado---------")
-      console.log("State logado:"+ state.loggedIn)
-      console.log("Nome do usuario:"+ state.userLogged.name)
+      console.log("State logado: "+ state.loggedIn)
+      console.log("Nome do usuario: "+ state.userLogged.name)
+      console.log("Token Logado: "+ state.token)
     },
 
     setUser() {
