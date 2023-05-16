@@ -12,7 +12,7 @@
         <form>
             <input type="text" id="login" class="fadeIn second" name="login" v-model="user.login" placeholder="login">
             <input type="text" id="password" class="fadeIn third" name="login" v-model="user.password" placeholder="password">
-            <button type="button" class="btn btn-primary" v-on:click="login()"> Log In </button>
+            <button type="button" class="btn btn-primary" v-on:click="login()" :disabled="verifyLoginPassword()"> Logar </button>
         </form>
 
         <!-- Remind Passowrd 
@@ -27,7 +27,7 @@
 
 <script>
 import axios from "axios";
-//import http from "../http-commons"
+import http from "../http-commons"
 
 axios.defaults.baseURL = 'http://localhost:8080/api';
 axios.defaults.headers = 'Content-type": "application/json'
@@ -38,59 +38,50 @@ export default {
     data() {
         return {
             user: {
-                login: "",
-                password: ""
+                login: "danilo@testenovo.com",
+                password: "123456"
             },
         }
     },
 
     methods: {
-
-        loginOld() {
-            axios.post('/auth', this.user)
-                .then(
-                    (result) => {
-                        this.$store.commit('setUser', result.data[0])
-                        this.$store.commit('setToken', result.data[1])
-                        this.$router.push('/home')
-                        console.log(result.data)
-                    }
-
-                )
-                .catch(
-                    error => {
-                        console.log(error.data)
-                    }
-                )
+        verifyLoginPassword() {
+            if (!this.user.login || !this.user.password) {
+                return true
+            } else {
+                return false
+            }
         },
 
         login() {
-            console.log("email:"+this.user.login)
-            console.log("senha:"+this.user.password)
-            console.log("email store:"+this.$store.state.user.login)
-            console.log("senha store:"+this.$store.state.user.password)
+            console.log("email:" + this.user.login)
+            console.log("senha:" + this.user.password)
 
-
-            /** 
             http.post('/auth', {
-                    "email": this.user.email, //"danilo@testenovo.com",
-                    "senha": this.user.senha //"123456"
+                    "email": `${this.user.login}`,
+                    "senha": `${this.user.password}`
                 })
                 .then(
                     (result) => {
                         this.$store.commit('setUser', result.data[0])
                         this.$store.commit('setToken', result.data[1])
+                        this.$store.commit('successLogin', result.data)
                         this.$router.push('/')
-                        console.log(result.data)
+                        //console.log(result.data)
                     }
                 )
                 .catch(
                     error => {
+                        console.log("email:" + this.user.login)
+                        console.log("senha:" + this.user.password)
+                        console.log("email store:" + this.$store.state.user.login)
+                        console.log("senha store:" + this.$store.state.user.password)
+                        console.log("Usuario logado:" + this.$store.state.loggedIn)
                         console.log(error.response.data.mensagem)
                         //TODO
                     }
                 )
-                */
+
         },
 
     }
