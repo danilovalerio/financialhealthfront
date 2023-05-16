@@ -27,7 +27,7 @@
 
 <script>
 import axios from "axios";
-import http from "../http-commons"
+//import http from "../http-commons"
 
 axios.defaults.baseURL = 'http://localhost:8080/api';
 axios.defaults.headers = 'Content-type": "application/json'
@@ -38,8 +38,8 @@ export default {
     data() {
         return {
             user: {
-                email: "",
-                senha: ""
+                login: "",
+                password: ""
             },
         }
     },
@@ -65,9 +65,16 @@ export default {
         },
 
         login() {
+            console.log("email:"+this.user.login)
+            console.log("senha:"+this.user.password)
+            console.log("email store:"+this.$store.state.user.login)
+            console.log("senha store:"+this.$store.state.user.password)
+
+
+            /** 
             http.post('/auth', {
-                    "email": "danilo@testenovo.com",
-                    "senha": "123456"
+                    "email": this.user.email, //"danilo@testenovo.com",
+                    "senha": this.user.senha //"123456"
                 })
                 .then(
                     (result) => {
@@ -76,13 +83,14 @@ export default {
                         this.$router.push('/')
                         console.log(result.data)
                     }
-
                 )
                 .catch(
                     error => {
-                        console.log(error.data)
+                        console.log(error.response.data.mensagem)
+                        //TODO
                     }
                 )
+                */
         },
 
     }
