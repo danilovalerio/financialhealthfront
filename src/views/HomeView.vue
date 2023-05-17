@@ -1,8 +1,6 @@
 <template>
 <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
     <TitulosShow msg="Esse é o novo componente" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
     
 
 </div>
@@ -10,7 +8,7 @@
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+//import HelloWorld from '@/components/HelloWorld.vue'
 import TitulosShow from '@/components/TitulosShow.vue'
 
 import axios from "axios";
@@ -20,7 +18,7 @@ export default {
     name: 'HomeView',
     components: {
         TitulosShow,
-        HelloWorld
+        //HelloWorld
     },
 
     computed: {
@@ -55,6 +53,8 @@ export default {
                 .then(
                     (result) => {
                         console.log(result.data)
+                        this.$store.commit('updateTitulos', result.data)
+                        this.$store.commit('setUser', result.data[0])
                     }
                 )
                 .catch(

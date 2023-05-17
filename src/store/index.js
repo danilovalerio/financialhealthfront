@@ -40,6 +40,11 @@ export default createStore({
     },
     logout(state){
       state.loggedIn = false
+    },
+    updateTitulos(state, dado) {
+      console.log("titulos antes de atualizar: "+state.titulos)
+      state.titulos = dado
+      console.log("titulos depois de atualizar: "+state.titulos)
     }
   },
   actions: {
@@ -51,11 +56,13 @@ export default createStore({
     },
     logout({ commit} ) {
       commit('logout')
+    },
+    updateTitulos( { commit }, dado) {
+      commit('updateTitulos', dado)
     }
   },
   modules: {
   },
-  methods: {
-    
+  methods: {    
   },
 })
