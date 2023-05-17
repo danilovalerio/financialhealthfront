@@ -1,13 +1,17 @@
 <template>
 <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
+    <TitulosShow msg="Esse é o novo componente" />
     <HelloWorld msg="Welcome to Your Vue.js App" />
+    
+
 </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
+import TitulosShow from '@/components/TitulosShow.vue'
 
 import axios from "axios";
 axios.defaults.baseURL = 'http://localhost:8080/api';
@@ -15,6 +19,7 @@ axios.defaults.baseURL = 'http://localhost:8080/api';
 export default {
     name: 'HomeView',
     components: {
+        TitulosShow,
         HelloWorld
     },
 
@@ -43,7 +48,7 @@ export default {
             axios.get('/titulos', {
                     headers: {
                         //user: JSON.stringify(this.user),
-                        'Content-Type':  'application/json',
+                        'Content-Type': 'application/json',
                         'Authorization': `${this.$store.state.token}`
                     }
                 })

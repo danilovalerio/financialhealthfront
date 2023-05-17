@@ -8,6 +8,7 @@ export default createStore({
       name: ""
     },
     token: "",  
+    titulos: [],
   },
   getters: {
   },
