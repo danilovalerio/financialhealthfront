@@ -10,7 +10,7 @@
         <tr v-for="(titulo, index) in $store.state.titulos" :key="index">
             <td class="tipo">{{titulo.tipo}}</td>
             <td>{{titulo.descricao}}</td>
-            <td class="valor">{{titulo.valor.toFixed(2)}}</td>
+            <td class="valor">R$ {{titulo.valor.toFixed(2).replace(".",",")}}</td>
         </tr>
     </table>
 
