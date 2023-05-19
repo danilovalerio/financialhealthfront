@@ -5,7 +5,7 @@
 
         <!-- Icon -->
         <div class="fadeIn first">
-            <img src="http://cdn.onlinewebfonts.com/svg/img_568656.png" id="icon" alt="User Icon" />
+            <img src="../assets/logo_enter.png" id="icon" alt="User Icon" />
         </div>
 
         <!-- Login Form -->
