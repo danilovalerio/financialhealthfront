@@ -68,8 +68,6 @@ export default {
                 })
                 .then(
                     (result) => {
-                        this.$store.commit('setUser', result.data[0])
-                        this.$store.commit('setToken', result.data[1])
                         this.$store.commit('successLogin', result.data)
                         this.$router.push('/')
                         //console.log(result.data)
