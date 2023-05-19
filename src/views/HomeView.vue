@@ -40,86 +40,13 @@ export default {
         if (!this.$store.state.loggedIn) {
             this.$router.push('/login')
         } else {
-            this.carregarTitulos()
+            // this.carregarTitulos()
+            this.$store.dispatch('loadDataFromAPI')
         }
 
     },
 
     methods: {
-        carregarTitulos() {
-            console.log("Carregar titulos da api")
-            //console.log("Token: "+this.token)
-
-            //obter titulos
-            axios.get('/titulos', {
-                    headers: {
-                        //user: JSON.stringify(this.user),
-                        'Content-Type': 'application/json',
-                        'Authorization': `${this.$store.state.token}`
-                    }
-                })
-                .then(
-                    (result) => {
-                        console.log(result.data)
-                        this.$store.commit('updateTitulos', result.data)
-                        this.$store.commit('setUser', result.data[0])
-                    }
-                )
-                .catch(
-                    error => {
-                        console.log(error.data)
-                    }
-                )
-
-            //obter centros de custo
-            axios.get('/centrosdecusto', {
-                    headers: {
-                        //user: JSON.stringify(this.user),
-                        'Content-Type': 'application/json',
-                        'Authorization': `${this.$store.state.token}`
-                    }
-                })
-                .then(
-                    (result) => {
-                        console.log(result.data)
-                        this.$store.commit('updateCentrosDeCustos', result.data)
-                        //this.$store.commit('updateTitulos', result.data)
-                        //this.$store.commit('setUser', result.data[0])
-                    }
-                )
-                .catch(
-                    error => {
-                        console.log(error.data)
-                    }
-                )
-
-            //obter dashboard
-            axios.get('/dashboard', {
-                    headers: {
-                        //user: JSON.stringify(this.user),
-                        'Content-Type': 'application/json',
-                        'Authorization': `${this.$store.state.token}`
-                    },
-                    params: {
-                        'periodoInicial': '2023-05-01 00:00:00',
-                        'periodoFinal': '2023-05-24 00:00:00'
-                    },
-                })
-                .then(
-                    (result) => {
-                        console.log(result.data)
-                        this.$store.commit('updateDashboard', result.data)
-                        //this.$store.commit('updateTitulos', result.data)
-                        //this.$store.commit('setUser', result.data[0])
-                    }
-                )
-                .catch(
-                    error => {
-                        console.log(error.data)
-                    }
-                )
-        },
-
         adicionarTitulo() {
             this.$store.state.adicionandoTitulo = true
         }
