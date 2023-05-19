@@ -23,14 +23,14 @@
 
     </div>
 </div>
+<div class="alert" v-if="errorLogin.show">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    {{ errorLogin.message }}
+</div>
 </template>
 
 <script>
-import axios from "axios";
 import http from "../http-commons"
-
-axios.defaults.baseURL = 'http://localhost:8080/api';
-axios.defaults.headers = 'Content-type": "application/json'
 
 export default {
 
@@ -41,6 +41,10 @@ export default {
                 login: "danilo@testenovo.com",
                 password: "123456"
             },
+            errorLogin: {
+                show: false,
+                message: "Não foi possível realizar o login, tente novamente!"
+            }
         }
     },
 
@@ -56,6 +60,7 @@ export default {
         login() {
             console.log("email:" + this.user.login)
             console.log("senha:" + this.user.password)
+            this.errorLogin.show = false
 
             http.post('/auth', {
                     "email": `${this.user.login}`,
@@ -74,10 +79,10 @@ export default {
                     error => {
                         console.log("email:" + this.user.login)
                         console.log("senha:" + this.user.password)
-                        console.log("email store:" + this.$store.state.user.login)
-                        console.log("senha store:" + this.$store.state.user.password)
                         console.log("Usuario logado:" + this.$store.state.loggedIn)
                         console.log(error.response.data.mensagem)
+                        this.errorLogin.show = true
+                        this.errorLogin.message = error.response.data.mensagem
                         //TODO
                     }
                 )
@@ -371,5 +376,32 @@ input[type=text]:placeholder {
 
 #icon {
     width: 60%;
+}
+
+/* MENSAGEM DE ALERTA */
+/* The alert message box */
+.alert {
+    padding: 20px;
+    background-color: #f44336;
+    /* Red */
+    color: white;
+    margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+    color: black;
 }
 </style>
