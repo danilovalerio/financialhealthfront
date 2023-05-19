@@ -26,9 +26,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## Project Tasks
 
 ### Tasks
-* Armazenar o token no local storage para persisitir login
-  * dsfasdfasd
-* Exibir Alert com erro quando login não tiver sucesso
   * Referencia: https://www.w3schools.com/howto/howto_js_alert.asp
 * Adicionar opções de 7 - 15 - 30 - 60 - 90 dias para intervalo de valores
 
