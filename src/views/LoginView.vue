@@ -48,6 +48,20 @@ export default {
         }
     },
 
+    beforeMount() {
+        console.log("Validar se está conectado no beforeMount() - Login")
+
+        // verifica se tem token no local storage e tenta acessar os dados da api
+        if (localStorage.getItem("tokenGenerated")) {
+            var dado = JSON.parse(localStorage.getItem("tokenGenerated"))
+
+            if (dado != "") {
+                this.$store.commit('successLogin', dado)
+            }
+        }
+
+    },
+
     methods: {
         verifyLoginPassword() {
             if (!this.user.login || !this.user.password) {

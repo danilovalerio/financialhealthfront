@@ -37,6 +37,27 @@ export default {
     beforeMount() {
         console.log("Validar se está conectado no beforeMount()")
 
+        // verifica se tem token no local storage e tenta acessar os dados da api
+        /*if (localStorage.getItem("tokenGenerated")) {
+            if (this.$store.state.userLogged.login != "") {
+                this.$store.state.loggedIn = true
+            }
+            //this.$store.dispatch(
+              //  'loadTokenLoaded',
+                //JSON.parse(localStorage.getItem("tokenGenerated")))
+            //this.$store.dispatch('loadDataFromAPI')
+        }*/
+
+        // verifica se tem token no local storage e tenta acessar os dados da api
+        if (localStorage.getItem("tokenGenerated")) {
+            var dado = JSON.parse(localStorage.getItem("tokenGenerated"))
+
+            if (dado != "") {
+                this.$store.commit('successLogin', dado)
+                this.$store.state.loggedIn = true
+            }
+        }
+
         if (!this.$store.state.loggedIn) {
             this.$router.push('/login')
         } else {

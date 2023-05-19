@@ -31,6 +31,10 @@ export default createStore({
       state.userLogged.name = dado.usuario.nome.split(" ")[0]
       state.token = dado.token
 
+
+      state.userLogged.token = dado.token
+      localStorage.setItem("tokenGenerated", JSON.stringify(dado))
+
       console.log("Após logado---------")
       console.log("State logado: " + state.loggedIn)
       console.log("Nome do usuario: " + state.userLogged.name)
@@ -41,12 +45,12 @@ export default createStore({
       console.log("Teste mutation " + this.state.loggedIn)
 
       //state.loggedIn = !state.loggedIn
-
-
       //console.log("Mutation setUserSendo Chamada: "+state.userLogged.login)
     },
     logout(state) {
       state.loggedIn = false
+      state.userLogged.token = ""
+      localStorage.setItem("tokenGenerated", JSON.stringify(""))
     },
     updateTitulos(state, dado) {
       console.log("titulos antes de atualizar: " + state.titulos)
@@ -62,6 +66,10 @@ export default createStore({
       console.log("Dashboard antes de atualizar: " + state.dashboard)
       state.dashboard = dado
       console.log("Dashboard depois de atualizar: " + state.centrosDeCustos)
+    },
+    updateToken(state, dado) {
+      console.log("Token Storage Load", dado)
+      state.userLogged.token = dado
     }
   },
 
@@ -78,6 +86,7 @@ export default createStore({
 
     //carregar dados da API
     loadDataFromAPI({ commit }) {
+      console.log("Load data from API chamado com toke "+ this.state.token)
       //obter titulos
       axios.get('/titulos', {
         headers: {
@@ -147,6 +156,9 @@ export default createStore({
           }
         )
     },
+    loadTokenLoaded( { commit }, dado) {
+      commit('updateToken', dado)
+    }
   },
   modules: {
   },
