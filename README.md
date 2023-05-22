@@ -26,8 +26,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ## Project Tasks
 
 ### Tasks
-  * Referencia: https://www.w3schools.com/howto/howto_js_alert.asp
 * Adicionar opções de 7 - 15 - 30 - 60 - 90 dias para intervalo de valores
+* Adicionar mascara numerica no campo do form
+* Adicionar lançamento a partir do form
 
 
 ### LoginView

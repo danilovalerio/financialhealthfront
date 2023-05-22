@@ -158,12 +158,66 @@ export default createStore({
     },
     loadTokenLoaded( { commit }, dado) {
       commit('updateToken', dado)
+    },
+    updateDashboard({ commit }, diasDeResumo){
+      console.log("Quantidade de dias:"+diasDeResumo)
+
+     // var inicio = '2023-05-01 00:00:00'
+      //var termino = '2023-05-24 00:00:00'
+
+      var formataDia = function(dia){
+        if(dia > 9) {
+          return dia
+        } else {
+          return "0"+dia
+        }
+
+      }
+
+      //function adicionarDiasData(dias){
+        var hoje        = new Date();
+        var dataVenc    = new Date(hoje.getTime() + (diasDeResumo * 24 * 60 * 60 * 1000));
+        var novaData = dataVenc.getDate() + "/" + (dataVenc.getMonth() + 1) + "/" + dataVenc.getFullYear();
+        var inicioFormatado =  dataVenc.getFullYear()+"-"+formataDia(dataVenc.getMonth())+"-"+formataDia(dataVenc.getDate())+" "+"00:00:00"
+        var terminoFormatado =  hoje.getFullYear()+"-"+formataDia(hoje.getMonth())+"-"+formataDia(hoje.getDate())+" "+"00:00:00"
+      //}
+       
+    
+      console.log("Inicio:"+dataVenc+"Término>"+hoje+" Nova data formatada"+novaData);
+      console.log("Formatado Inicio:"+inicioFormatado+"   Término:"+terminoFormatado);
+
+     
+     // console.log(dataDeHora + " <--> " + dat)
+      
+      //atualizar dashboard
+      axios.get('/dashboard', {
+        headers: {
+          //user: JSON.stringify(this.user),
+          'Content-Type': 'application/json',
+          'Authorization': `${this.state.token}`
+        },
+        params: {
+          'periodoInicial': `${terminoFormatado}`,
+          'periodoFinal': `${inicioFormatado}`
+        },
+      })
+        .then(
+          (result) => {
+            console.log(result.data)
+            commit('updateDashboard', result.data)
+            console.log("Dashboard atualizado")
+          }
+        )
+        .catch(
+          error => {
+            console.log(error.data)
+          }
+        )
     }
   },
   modules: {
   },
 
   methods: {
-
   },
 })
