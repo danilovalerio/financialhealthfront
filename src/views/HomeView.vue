@@ -1,7 +1,6 @@
 <template>
 <div class="home">
-    <DashboardRange />
-    <Dashboard msg="teste" />
+    <ResumeComp msg="teste" />
     <TitulosShow msg="Esse é o novo componente" v-if="!$store.state.adicionandoTitulo" />
     <TituloForm msg="" v-if="$store.state.adicionandoTitulo" />
     <input type="button" value="Adicionar Título" @click="adicionarTitulo()">
@@ -15,8 +14,7 @@
 //import HelloWorld from '@/components/HelloWorld.vue'
 import TituloForm from '@/components/TituloForm.vue';
 import TitulosShow from '@/components/TitulosShow.vue'
-import Dashboard from '@/components/Dashboard.vue';
-import DashboardRange from '@/components/DashboardRange.vue';
+import ResumeComp from '@/components/Resume.vue';
 
 import axios from "axios";
 axios.defaults.baseURL = 'http://localhost:8080/api';
@@ -24,11 +22,10 @@ axios.defaults.baseURL = 'http://localhost:8080/api';
 export default {
     name: 'HomeView',
     components: {
-        DashboardRange,
-        Dashboard,
-        TitulosShow,
-        TituloForm
-    },
+    ResumeComp,
+    TitulosShow,
+    TituloForm
+},
 
     computed: {
         user() {

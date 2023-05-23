@@ -1,6 +1,7 @@
 <template>
   <nav>
     <router-link to="/">Home</router-link> |
+    <router-link to="/vencimentos">Vencimentos</router-link> |
     <router-link to="/about">About</router-link> |
     <router-link to="/login" v-if="!this.$store.state.loggedIn">Login</router-link>
     <router-link to="/login"  @click="this.$store.dispatch('logout')" v-else> Logout</router-link>
