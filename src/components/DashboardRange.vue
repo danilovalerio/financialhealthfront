@@ -39,7 +39,7 @@ export default {
             if (numero >= 0) {
                 return numero.toFixed(2)
             }
-            return 0
+            return 0.0
         },
 
         selecionarPeriodo(dias) {

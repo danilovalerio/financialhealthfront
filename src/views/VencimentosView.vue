@@ -2,18 +2,21 @@
 <div class="home">
     <ResumeComp msg="teste" class="dash"/>
     <DashboardRange class="range" />
-    <TitulosShow msg="Vencimentos página" v-if="!$store.state.adicionandoTitulo" />
-    <TituloForm msg="" v-if="$store.state.adicionandoTitulo" />
 </div>
-<div>
-    <h1>Lançamentos</h1>
+<div class="vencimentos">
+    <h2>Vencimentos dos últimos {{ this.$store.state.filtroRangeDiasDashboard }} dias</h2>
     <table>
         <tr>
             <th>Tipo</th>
             <th>Descrição</th>
             <th>Valor</th>
         </tr>
-        <tr v-for="(titulo, index) in $store.state.titulos" :key="index">
+        <tr v-for="(titulo, index) in $store.state.dashboard.titulosAreceber" :key="index">
+            <td class="tipo">{{titulo.tipo}}</td>
+            <td>{{titulo.descricao}}</td>
+            <td class="valor">R$ {{titulo.valor.toFixed(2).replace(".",",")}}</td>
+        </tr>
+        <tr v-for="(titulo, index) in $store.state.dashboard.titulosApagar" :key="index">
             <td class="tipo">{{titulo.tipo}}</td>
             <td>{{titulo.descricao}}</td>
             <td class="valor">R$ {{titulo.valor.toFixed(2).replace(".",",")}}</td>
@@ -46,13 +49,18 @@ export default {
         user() {
             return this.$store.state.user
         },
+    },
 
+    beforeMount() {
+        console.log("---- <br>Carrega vencimentos")
+        this.$store.dispatch('updateDashboard', 30)
+        
     },
 
     methods: {
         adicionarTitulo() {
             this.$store.state.adicionandoTitulo = true
-        }
+        },
     }
 
 }
@@ -78,6 +86,10 @@ body {
 	float: left;
 	width: 25%;
 	padding: 0 10px;
+}
+
+.vencimentos {
+    margin: 4px;
 }
 
 .dash {

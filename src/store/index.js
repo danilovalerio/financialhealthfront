@@ -14,6 +14,7 @@ export default createStore({
     adicionandoTitulo: false,
     centrosDeCustos: [],
     dashboard: [],
+    filtroRangeDiasDashboard: 0
   },
 
   getters: {
@@ -70,6 +71,9 @@ export default createStore({
     updateToken(state, dado) {
       console.log("Token Storage Load", dado)
       state.userLogged.token = dado
+    },
+    updateRangeDiasVencimentos(state, dado) {
+      state.filtroRangeDiasDashboard = dado
     }
   },
 
@@ -161,6 +165,7 @@ export default createStore({
     },
     updateDashboard({ commit }, diasDeResumo){
       console.log("Quantidade de dias:"+diasDeResumo)
+      commit('updateRangeDiasVencimentos', diasDeResumo)
 
      // var inicio = '2023-05-01 00:00:00'
       //var termino = '2023-05-24 00:00:00'
