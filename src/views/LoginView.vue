@@ -23,27 +23,28 @@
 
     </div>
 </div>
-<div class="alert" v-if="errorLogin.show">
-    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-    {{ errorLogin.message }}
-</div>
+
+    <LoginError/>
+
+
 </template>
 
 <script>
 import http from "../http-commons"
+import LoginError from "@/components/LoginError.vue"
 
 export default {
 
     name: 'LoginPage',
+    components: {
+        LoginError
+    },
+
     data() {
         return {
             user: {
                 login: "danilo@testenovo.com",
                 password: "123456"
-            },
-            errorLogin: {
-                show: false,
-                message: "Não foi possível realizar o login, tente novamente!"
             }
         }
     },
@@ -74,7 +75,6 @@ export default {
         login() {
             console.log("email:" + this.user.login)
             console.log("senha:" + this.user.password)
-            this.errorLogin.show = false
 
             http.post('/auth', {
                     "email": `${this.user.login}`,
@@ -92,9 +92,7 @@ export default {
                         console.log("email:" + this.user.login)
                         console.log("senha:" + this.user.password)
                         console.log("Usuario logado:" + this.$store.state.loggedIn)
-                        console.log(error.response.data.mensagem)
-                        this.errorLogin.show = true
-                        this.errorLogin.message = error.response.data.mensagem
+                        this.$store.dispatch('errorLogin', [true, error.response.data.mensagem])
                         //TODO
                     }
                 )

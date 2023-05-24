@@ -2,6 +2,7 @@
 <div class="home">
     <ResumeComp msg="teste" class="dash"/>
     <DashboardRange class="range" />
+    <LoginError/>
 </div>
 <div class="vencimentos">
     <h2>Vencimentos dos últimos {{ this.$store.state.filtroRangeDiasDashboard }} dias</h2>
@@ -9,16 +10,19 @@
         <tr>
             <th>Tipo</th>
             <th>Descrição</th>
+            <th>Vencimento</th>
             <th>Valor</th>
         </tr>
         <tr v-for="(titulo, index) in $store.state.dashboard.titulosAreceber" :key="index">
             <td class="tipo">{{titulo.tipo}}</td>
             <td>{{titulo.descricao}}</td>
+            <td class="vencimento">{{titulo.dataVencimento}}</td>
             <td class="valor">R$ {{titulo.valor.toFixed(2).replace(".",",")}}</td>
         </tr>
         <tr v-for="(titulo, index) in $store.state.dashboard.titulosApagar" :key="index">
             <td class="tipo">{{titulo.tipo}}</td>
             <td>{{titulo.descricao}}</td>
+            <td class="vencimento">{{titulo.dataVencimento}}</td>
             <td class="valor">R$ {{titulo.valor.toFixed(2).replace(".",",")}}</td>
         </tr>
     </table>
@@ -34,6 +38,7 @@
 //import Dashboard from '@/components/Dashboard.vue';
 import DashboardRange from '@/components/DashboardRange.vue';
 import ResumeComp from '@/components/Resume.vue'
+import LoginError from '@/components/LoginError.vue';
 
 import axios from "axios";
 axios.defaults.baseURL = 'http://localhost:8080/api';
@@ -42,7 +47,8 @@ export default {
     name: 'VencimentosView',
     components: {
         DashboardRange,
-        ResumeComp
+        ResumeComp,
+        LoginError
     },
 
     computed: {
@@ -51,10 +57,15 @@ export default {
         },
     },
 
-    beforeMount() {
-        console.log("---- <br>Carrega vencimentos")
-        this.$store.dispatch('updateDashboard', 30)
-        
+    created() {
+        console.log(
+            "TRATAR PARA CHAMAR SOMENTE QUANDO MUDAR \nCarrega vencimentos " +this.$store.state.filtroRangeDiasDashboard
+            )
+        if(this.$store.state.filtroRangeDiasDashboard == 0) {
+            this.$store.dispatch('updateDashboard', 30)
+        } else {
+            this.$store.dispatch('updateDashboard', this.$store.state.filtroRangeDiasDashboard)
+        }        
     },
 
     methods: {
