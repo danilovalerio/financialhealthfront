@@ -1,7 +1,6 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
 
-
 export default createStore({
   state: {
     loggedIn: false,
@@ -90,7 +89,7 @@ export default createStore({
     }
   },
 
-  actions: {
+  actions: {    
     setUser({ commit }) {
       commit('setUser')
     },
@@ -247,6 +246,37 @@ export default createStore({
       
       //atualizar dashboard
       axios.post('/titulos',dado, {
+        headers: {
+          //user: JSON.stringify(this.user),
+          'Content-Type': 'application/json',
+          'Authorization': `${this.state.token}`
+         },
+       /**  params: {
+          'periodoInicial': `${inicioFormatado}`,
+          'periodoFinal': `${terminoFormatado}`
+        },*/
+      })
+        .then(
+          (result) => {
+            console.log(result.data)
+            //commit('updateDashboard', result.data)
+            //console.log("Dashboard atualizado")
+          }
+        )
+        .catch(
+          error => {
+            console.log(error.data)
+            commit('errorLogin', [true, 'Não foi possível realizar operação agora, tente mais tarde novamente!'])
+            console.log("Error exibe: "+true+" - "+null)
+          }
+        )
+    },
+
+    deletarTitulo({ commit }, dado) {
+      console.log("ACTION deleteTitulo: "+dado)
+      
+      //atualizar dashboard
+      axios.delete('/titulos/'+`${dado}`, {
         headers: {
           //user: JSON.stringify(this.user),
           'Content-Type': 'application/json',
