@@ -11,11 +11,10 @@
                         <label for="tipo">Tipo: </label>
                     </td>
                     <td class="info">
-                        <select name="tipo" id="tipo">
+                        <select name="tipo" id="tipo" v-model="newTitle.tipo">
                             <option value="ARECEBER">Receita</option>
                             <option value="APAGAR">Despesa</option>
                         </select><br>
-
                     </td>
                 </tr>
                 <tr>
@@ -23,8 +22,7 @@
                         <label for="fname">Descrição: </label>
                     </td>
                     <td class="info">
-                        <input type="text" id="fname" name="fname"><br>
-
+                        <input type="text" id="fname" name="fname" v-model="newTitle.descricao"><br>
                     </td>
                 </tr>
                 <tr>
@@ -32,7 +30,7 @@
                         <label for="lname">Valor: </label>
                     </td>
                     <td class="info">
-                        <input type="text" id="lname" name="lname"><br>
+                        <input type="text" id="lname" name="lname" v-model="newTitle.valor"><br>
                     </td>
                 </tr>
                 <tr>
@@ -40,14 +38,22 @@
                         <label for="centroDeCusto">Centro de custo: </label>
                     </td>
                     <td class="info">
-                        <select name="centrodecusto" id="centrodecusto">
-                            <option v-for="(centro, index) in $store.state.centrosDeCustos" :key="index" :value="centro.descricao">{{centro.descricao}}</option>
+                        <select name="id" id="id" v-model="newTitle.id">
+                            <option v-for="(centro, index) in $store.state.centrosDeCustos" :key="index" :value="centro.id">{{centro.descricao}}</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
+                    <td>
+                        <label for="lname">Data vencimento: </label>
+                    </td>
+                    <td class="info">
+                        <input type="text" id="datavencimento" name="dataVencimento" v-model="newTitle.dataVencimento"><br>
+                    </td>
+                </tr>
+                <tr>
                     <td colspan="2" class="inserir">
-                        <input type="button" value="OK" @click="addMember()">
+                        <input type="button" value="OK" @click="adicionarTitulo()">
                     </td>
                 </tr>
             </table>
@@ -62,6 +68,30 @@ export default {
     name: 'TituloForm',
     props: {
         msg: String
+    },
+    data() {
+        return {
+            newTitle: {},
+            newCentroDeCusto: {}
+        }
+    },
+    methods: {
+        adicionarTitulo() {
+            this.newTitle.tipo,
+            this.newTitle.valor,
+            this.newTitle.dataVencimento
+            var dadoNovo = {
+                "id": this.newTitle.id
+            }
+            this.newTitle.centrosDeCustos = [dadoNovo]
+            /*
+            this.newTitle.descricao,
+                    this.newTitle.valor,
+                    this.newTitle.centrodecusto*/
+
+            console.log("Adicionar " + JSON.stringify(this.newTitle))
+            this.$store.dispatch('addTitulo', this.newTitle)
+        }
     }
 }
 </script>

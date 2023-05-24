@@ -31,7 +31,7 @@ export default {
             if (numero >= 0) {
                 return numero.toFixed(2).replace(".",",")
             }
-            return 0.00.replace(".",",")
+            return (0.00).toString().replace(".",",")
         }
     }
 }

@@ -1,6 +1,7 @@
 <template>
 <div class="home">
     <ResumeComp msg="teste" />
+    <LoginError/>
     <TitulosShow msg="Esse é o novo componente" v-if="!$store.state.adicionandoTitulo" />
     <TituloForm msg="" v-if="$store.state.adicionandoTitulo" />
     <input type="button" value="Adicionar Título" @click="adicionarTitulo()" v-if="!this.$store.state.adicionandoTitulo">
@@ -15,6 +16,7 @@
 import TituloForm from '@/components/TituloForm.vue';
 import TitulosShow from '@/components/TitulosShow.vue'
 import ResumeComp from '@/components/Resume.vue';
+import LoginError from '@/components/LoginError.vue';
 
 import axios from "axios";
 axios.defaults.baseURL = 'http://localhost:8080/api';
@@ -24,7 +26,8 @@ export default {
     components: {
         ResumeComp,
         TitulosShow,
-        TituloForm
+        TituloForm,
+        LoginError
     },
 
     computed: {
