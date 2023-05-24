@@ -29,11 +29,15 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 * ✓ Adicionar opções de 7 - 15 - 30 - 60 - 90 dias para intervalo de valores
 * Adicionar mascara numerica no campo do form
 * Adicionar mascara de data no campo do form
+  
 * ✓ Adicionar lançamento a partir do form
   * Ao adicionar lançamento, limpar campos 
   * Ao adicionar, exibir mensagem de sucesso para dar feedback
   * Atualizar a lista dos dados
-* ✓ Excluir Título (lembrando que só será inativado para manter histórico)
+  * [BUG] - Ao adicionar um lançamento o centro de custos cadastra somente o ID verificar se isso está correto
+  
+* ✓ Excluir Título - Lançamento (lembrando que só será inativado para manter histórico)
+  * [BUG] - Está sendo listados o itens inativados (excluídos) também 
   * Ao excluir, exibir mensagem de sucesso para dar feedback
 * Editar Título a partir do form
 
