@@ -3,8 +3,8 @@
     <ResumeComp msg="teste" />
     <TitulosShow msg="Esse é o novo componente" v-if="!$store.state.adicionandoTitulo" />
     <TituloForm msg="" v-if="$store.state.adicionandoTitulo" />
-    <input type="button" value="Adicionar Título" @click="adicionarTitulo()">
-    <input type="button" value="Voltar" @click="this.$store.state.adicionandoTitulo = false">
+    <input type="button" value="Adicionar Título" @click="adicionarTitulo()" v-if="!this.$store.state.adicionandoTitulo">
+    <input type="button" value="Voltar" @click="this.$store.state.adicionandoTitulo = false" v-if="this.$store.state.adicionandoTitulo">
 
 </div>
 </template>
@@ -22,16 +22,15 @@ axios.defaults.baseURL = 'http://localhost:8080/api';
 export default {
     name: 'HomeView',
     components: {
-    ResumeComp,
-    TitulosShow,
-    TituloForm
-},
+        ResumeComp,
+        TitulosShow,
+        TituloForm
+    },
 
     computed: {
         user() {
             return this.$store.state.user
         },
-
     },
 
     beforeMount() {

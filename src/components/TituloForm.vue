@@ -47,7 +47,7 @@
                 </tr>
                 <tr>
                     <td colspan="2" class="inserir">
-                        <input type="button" value="Adicionar" @click="addMember()">
+                        <input type="button" value="OK" @click="addMember()">
                     </td>
                 </tr>
             </table>

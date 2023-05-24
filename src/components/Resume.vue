@@ -29,9 +29,9 @@ export default {
     methods: {
         tratarCasasDecimais(numero) {
             if (numero >= 0) {
-                return numero.toFixed(2)
+                return numero.toFixed(2).replace(".",",")
             }
-            return 0
+            return 0.00.replace(".",",")
         }
     }
 }
