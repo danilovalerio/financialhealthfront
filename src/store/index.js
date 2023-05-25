@@ -17,7 +17,12 @@ export default createStore({
     adicionandoTitulo: false,
     centrosDeCustos: [],
     dashboard: [],
-    filtroRangeDiasDashboard: 0
+    filtroRangeDiasDashboard: 0,
+    alertMessage: {
+      show: false,
+      type: "alert success",
+      message: "Não foi possível realizar o login, tente novamente!"
+    },
   },
 
   getters: {
@@ -82,14 +87,23 @@ export default createStore({
     //LOGIN
     errorLogin(state, [showError, message]) {
       state.errorLogin.show = showError
-      console.log("Mutation errorLogin: " + showError+ " "+ message)
-      if(message != null) {
+      console.log("Mutation errorLogin: " + showError + " " + message)
+      if (message != null) {
         state.errorLogin.message = message
+      }
+    },
+
+    //Show Alert Message
+    alertMessage(state, [show, type, message]) {
+      state.alertMessage.show = show
+      console.log("Mutation alertMessage: " + show + " " + type + " " + message)
+      if (message != null) {
+        state.alertMessage.message = message
       }
     }
   },
 
-  actions: {    
+  actions: {
     setUser({ commit }) {
       commit('setUser')
     },
@@ -195,8 +209,8 @@ export default createStore({
       var hoje = new Date();
       var dataVenc = new Date(hoje.getTime() - (diasDeResumo * 24 * 60 * 60 * 1000));
       var novaData = dataVenc.getDate() + "/" + (dataVenc.getMonth() + 1) + "/" + dataVenc.getFullYear();
-      var inicioFormatado = dataVenc.getFullYear() + "-" + formataDia(dataVenc.getMonth()+1) + "-" + formataDia(dataVenc.getDate()) + " " + "00:00:00"
-      var terminoFormatado = hoje.getFullYear() + "-" + formataDia(hoje.getMonth()+1) + "-" + formataDia(hoje.getDate()) + " " + "00:00:00"
+      var inicioFormatado = dataVenc.getFullYear() + "-" + formataDia(dataVenc.getMonth() + 1) + "-" + formataDia(dataVenc.getDate()) + " " + "00:00:00"
+      var terminoFormatado = hoje.getFullYear() + "-" + formataDia(hoje.getMonth() + 1) + "-" + formataDia(hoje.getDate()) + " " + "00:00:00"
       //}
 
 
@@ -229,36 +243,37 @@ export default createStore({
           error => {
             console.log(error.data)
             commit('errorLogin', [true, error.response.data.mensagem])
-            console.log("Error exibe: "+true+" - "+error.response.data.mensagem)
+            console.log("Error exibe: " + true + " - " + error.response.data.mensagem)
           }
         )
     },
 
-     //Seção de Login
-     errorLogin({commit}, [showError, message]) {
-      console.log("Error exibe: "+showError+" - "+message)
+    //Seção de Login
+    errorLogin({ commit }, [showError, message]) {
+      console.log("Error exibe: " + showError + " - " + message)
       commit('errorLogin', [showError, message])
-     },
+    },
 
-     //inserir novo título
-     addTitulo({ commit }, dado) {
-      console.log("ACTION addTitulo: "+dado)
-      
+    //inserir novo título
+    addTitulo({ commit }, dado) {
+      console.log("ACTION addTitulo: " + dado)
+
       //atualizar dashboard
-      axios.post('/titulos',dado, {
+      axios.post('/titulos', dado, {
         headers: {
           //user: JSON.stringify(this.user),
           'Content-Type': 'application/json',
           'Authorization': `${this.state.token}`
-         },
-       /**  params: {
-          'periodoInicial': `${inicioFormatado}`,
-          'periodoFinal': `${terminoFormatado}`
-        },*/
+        },
+        /**  params: {
+           'periodoInicial': `${inicioFormatado}`,
+           'periodoFinal': `${terminoFormatado}`
+         },*/
       })
         .then(
           (result) => {
             console.log(result.data)
+            commit('alertMessage',[true, 'alert success', 'Teste Sucesso'])
             //commit('updateDashboard', result.data)
             //console.log("Dashboard atualizado")
           }
@@ -267,29 +282,30 @@ export default createStore({
           error => {
             console.log(error.data)
             commit('errorLogin', [true, 'Não foi possível realizar operação agora, tente mais tarde novamente!'])
-            console.log("Error exibe: "+true+" - "+null)
+            console.log("Error exibe: " + true + " - " + null)
           }
         )
     },
 
     deletarTitulo({ commit }, dado) {
-      console.log("ACTION deleteTitulo: "+dado)
-      
+      console.log("ACTION deleteTitulo: " + dado)
+
       //atualizar dashboard
-      axios.delete('/titulos/'+`${dado}`, {
+      axios.delete('/titulos/' + `${dado}`, {
         headers: {
           //user: JSON.stringify(this.user),
           'Content-Type': 'application/json',
           'Authorization': `${this.state.token}`
-         },
-       /**  params: {
-          'periodoInicial': `${inicioFormatado}`,
-          'periodoFinal': `${terminoFormatado}`
-        },*/
+        },
+        /**  params: {
+           'periodoInicial': `${inicioFormatado}`,
+           'periodoFinal': `${terminoFormatado}`
+         },*/
       })
         .then(
           (result) => {
             console.log(result.data)
+            commit('alertMessage',true, 'alert success', 'Teste Sucesso')
             //commit('updateDashboard', result.data)
             //console.log("Dashboard atualizado")
           }
@@ -298,9 +314,14 @@ export default createStore({
           error => {
             console.log(error.data)
             commit('errorLogin', [true, 'Não foi possível realizar operação agora, tente mais tarde novamente!'])
-            console.log("Error exibe: "+true+" - "+null)
+            console.log("Error exibe: " + true + " - " + null)
           }
         )
+
+        
+    },
+    alertMessage({ commit }, [show, type, message]) {
+      commit('alertMessage', [show,type, message])
     },
   },
   modules: {

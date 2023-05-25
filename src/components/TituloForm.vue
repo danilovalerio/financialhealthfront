@@ -1,4 +1,5 @@
 <template>
+    <AlertMessage />
 <div>
     <section class="add-more">
         <form>
@@ -57,15 +58,20 @@
                     </td>
                 </tr>
             </table>
-
         </form>
     </section>
 </div>
 </template>
 
 <script>
+
+import AlertMessage from '@/components/AlertMessage.vue';
+
 export default {
     name: 'TituloForm',
+    components: {
+        AlertMessage
+    },
     props: {
         msg: String
     },

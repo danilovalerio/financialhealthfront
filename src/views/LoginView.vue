@@ -111,6 +111,7 @@ html {
 body {
     font-family: "Poppins", sans-serif;
     height: 100vh;
+    margin-top: 6%;
 }
 
 a {

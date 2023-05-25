@@ -2,11 +2,11 @@
 <div class="home">
     <ResumeComp msg="teste" />
     <LoginError/>
-    <TitulosShow msg="Esse é o novo componente" v-if="!$store.state.adicionandoTitulo" />
-    <TituloForm msg="" v-if="$store.state.adicionandoTitulo" />
     <input type="button" value="Adicionar Título" @click="adicionarTitulo()" v-if="!this.$store.state.adicionandoTitulo">
     <input type="button" value="Voltar" @click="this.$store.state.adicionandoTitulo = false" v-if="this.$store.state.adicionandoTitulo">
-
+    <TitulosShow msg="Esse é o novo componente" v-if="!$store.state.adicionandoTitulo" />
+    <TituloForm msg="" v-if="$store.state.adicionandoTitulo" />
+   
 </div>
 </template>
 

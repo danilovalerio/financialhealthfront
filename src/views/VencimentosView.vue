@@ -121,6 +121,7 @@ body {
 	text-align: center;
 	background-color: $background-color_1;
 }
+
 @media screen and (max-width: 600px) {
 	.column {
 		width: 100%;
@@ -132,6 +133,7 @@ body {
 
 
 .home {
+    margin-top: 6%;
     font-size: 12px;
 }
 
