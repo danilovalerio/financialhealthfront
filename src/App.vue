@@ -45,6 +45,10 @@ $background-color_1: #333;
         text-align: center;
         padding: 14px;
         text-decoration: none;
+
+        &.router-link-exact-active {
+      color: #42b983;
+    }
     }
 }
 
