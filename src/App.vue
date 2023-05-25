@@ -6,7 +6,7 @@
     <router-link to="/login" v-if="!this.$store.state.loggedIn">Login</router-link>
     <router-link to="/login" @click="this.$store.dispatch('logout')" v-else> Logout</router-link>
 </nav>
-<router-view class="views"/>
+<router-view class="views" />
 </template>
 
 <style lang="scss">
@@ -47,8 +47,8 @@ $background-color_1: #333;
         text-decoration: none;
 
         &.router-link-exact-active {
-      color: #42b983;
-    }
+            color: #42b983;
+        }
     }
 }
 
@@ -69,6 +69,6 @@ $background-color_1: #333;
 }
 
 .views {
-  margin-top: 6%;
+    margin-top: 6%;
 }
 </style>
