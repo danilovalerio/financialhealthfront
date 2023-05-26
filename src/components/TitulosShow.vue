@@ -1,13 +1,16 @@
 <template>
 <div>
     <h1>Lançamentos</h1>
-    <table>
+    <table class="fixed_headers">
+    <thead>
         <tr>
             <th>Tipo</th>
             <th>Descrição</th>
             <th>Valor</th>
             <th>Ações</th>
         </tr>
+    </thead>
+    <tbody>
         <tr v-for="(titulo, index) in $store.state.titulos" :key="index">
             <td class="tipo">{{titulo.tipo}}</td>
             <td>{{titulo.descricao}}</td>
@@ -18,6 +21,7 @@
             <button type="submit"><fa icon="edit"/></button>
             </td>
         </tr>
+    </tbody>
     </table>
 
 </div>
@@ -48,6 +52,81 @@ export default {
         width: 2px;
         height: 35px;
     }
+}
+
+.lancamentos {
+    overflow-y: auto;
+}
+
+$color_1: #fdfdfd;
+$background-color_1: #333333;
+$background-color_2: #dddddd;
+
+.fixed_headers {
+	width: 750px;
+	table-layout: fixed;
+	border-collapse: collapse;
+	th {
+		text-decoration: underline;
+		padding: 5px;
+		text-align: left;
+		&:nth-child(1) {
+			min-width: 200px;
+		}
+		&:nth-child(2) {
+			min-width: 200px;
+		}
+		&:nth-child(3) {
+			width: 350px;
+		}
+        &:nth-child(4) {
+			width: 200px;
+		}
+	}
+	td {
+		padding: 5px;
+		text-align: left;
+		&:nth-child(1) {
+			min-width: 200px;
+		}
+		&:nth-child(2) {
+			min-width: 200px;
+		}
+		&:nth-child(3) {
+			width: 350px;
+		}
+        &:nth-child(4) {
+			width: 200px;
+		}
+	}
+	thead {
+		background-color: $background-color_1;
+		color: $color_1;
+		tr {
+			display: block;
+			position: relative;
+		}
+	}
+	tbody {
+		display: block;
+		overflow: auto;
+		width: 100%;
+		height: 300px;
+		tr {
+			&:nth-child(even) {
+				background-color: $background-color_2;
+			}
+		}
+	}
+}
+.old_ie_wrapper {
+	height: 300px;
+	width: 750px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	tbody {
+		height: auto;
+	}
 }
 
 </style>
