@@ -1,8 +1,8 @@
 <template>
-<nav id="navbar">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/vencimentos">Vencimentos</router-link> |
-    <router-link to="/about">About</router-link> |
+<nav v-if="this.$store.state.loggedIn">
+    <router-link to="/">Home</router-link>
+    <router-link to="/vencimentos">Vencimentos</router-link>
+    <router-link to="/about">About</router-link>
     <router-link to="/login" v-if="!this.$store.state.loggedIn">Login</router-link>
     <router-link to="/login" @click="this.$store.dispatch('logout')" v-else> Logout</router-link>
 </nav>
@@ -27,7 +27,7 @@ $background-color_1: #333;
 /* Page content */
 /* The sticky class is added to the navbar with JS when it reaches its scroll position */
 /* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
-#navbar {
+nav {
     position: fixed;
     width: 100vw;
     left: 0;
@@ -45,6 +45,7 @@ $background-color_1: #333;
         text-align: center;
         padding: 14px;
         text-decoration: none;
+        align-items: center;
 
         &.router-link-exact-active {
             color: #42b983;
@@ -52,20 +53,15 @@ $background-color_1: #333;
     }
 }
 
-.content {
-    padding: 16px;
+.views {
+    padding-top: 16px;
 }
 
 .sticky {
     position: fixed;
     top: 0;
-    width: 100%;
 
-    + {
-        .content {
-            padding-top: 60px;
-        }
-    }
+   
 }
 
 .views {

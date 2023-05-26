@@ -77,3 +77,9 @@ export default {
 
 }
 </script>
+<style>
+.home {
+    margin: 0px;
+    padding: 0px;
+}
+</style>

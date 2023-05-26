@@ -40,6 +40,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
   * [BUG] - Está sendo listados o itens inativados (excluídos) também 
   * Ao excluir, exibir mensagem de sucesso para dar feedback
 * Editar Título a partir do form
+* Se não estiver logado nem exibir o menu NAV
 
 
 ### LoginView

@@ -133,7 +133,6 @@ body {
 
 
 .home {
-    margin-top: 6%;
     font-size: 12px;
 }
 

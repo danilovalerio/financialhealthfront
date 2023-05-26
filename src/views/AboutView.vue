@@ -4,7 +4,4 @@
   </div>
 </template>
 <style>
-.about {
-  margin-top: 6%;
-}
 </style>
