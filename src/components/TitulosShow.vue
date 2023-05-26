@@ -54,15 +54,13 @@ export default {
     }
 }
 
-.lancamentos {
-    overflow-y: auto;
-}
 
 $color_1: #fdfdfd;
 $background-color_1: #333333;
 $background-color_2: #dddddd;
 
 .fixed_headers {
+    overflow-y: auto;
 	width: 750px;
 	table-layout: fixed;
 	border-collapse: collapse;
@@ -81,6 +79,7 @@ $background-color_2: #dddddd;
 		}
         &:nth-child(4) {
 			width: 200px;
+            text-align: center;
 		}
 	}
 	td {
@@ -97,6 +96,7 @@ $background-color_2: #dddddd;
 		}
         &:nth-child(4) {
 			width: 200px;
+            text-align: center;
 		}
 	}
 	thead {
@@ -111,7 +111,7 @@ $background-color_2: #dddddd;
 		display: block;
 		overflow: auto;
 		width: 100%;
-		height: 300px;
+		height: 200px;
 		tr {
 			&:nth-child(even) {
 				background-color: $background-color_2;
