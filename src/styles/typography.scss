@@ -25,3 +25,27 @@ ul {
   }
 }
 
+
+h1.glow {
+  font-size: 24px;
+  color: #380303;
+  margin-top: 40px;
+  text-align: center;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+
+$color-anim1: #0011ff;
+$color-anim2: #4fc08d;
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 20px #fff, 0 0 30px $color-anim2, 0 0 40px $color-anim2, 0 0 50px $color-anim2, 0 0 60px $color-anim2, 0 0 70px $color-anim2, 0 0 80px $color-anim2;
+  }
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px $color-anim1, 0 0 40px $color-anim1, 0 0 50px $color-anim1, 0 0 60px $color-anim1, 0 0 70px $color-anim1, 0 0 80px $color-anim1;
+  }
+}
+

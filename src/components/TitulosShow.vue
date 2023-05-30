@@ -18,7 +18,7 @@
             <td class="valor">
             
             <button type="submit" @click="deletar(titulo.id)"><fa icon="remove"/></button>
-            <button type="submit"><fa icon="edit"/></button>
+            <!--<button type="submit"><fa icon="edit"/></button>-->
             </td>
         </tr>
     </tbody>

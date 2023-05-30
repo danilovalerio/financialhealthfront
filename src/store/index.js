@@ -23,6 +23,7 @@ export default createStore({
       type: "alert success",
       message: "Não foi possível realizar o login, tente novamente!"
     },
+    cadastraUsuario: false,
   },
 
   getters: {
@@ -273,7 +274,7 @@ export default createStore({
         .then(
           (result) => {
             console.log(result.data)
-            commit('alertMessage',[true, 'alert success', 'Teste Sucesso'])
+            commit('alertMessage', [true, 'alert success', 'Teste Sucesso'])
             //commit('updateDashboard', result.data)
             //console.log("Dashboard atualizado")
           }
@@ -290,7 +291,9 @@ export default createStore({
     deletarTitulo({ commit }, dado) {
       console.log("ACTION deleteTitulo: " + dado)
 
-      //atualizar dashboard
+      
+
+      //deletar titulo
       axios.delete('/titulos/' + `${dado}`, {
         headers: {
           //user: JSON.stringify(this.user),
@@ -305,23 +308,19 @@ export default createStore({
         .then(
           (result) => {
             console.log(result.data)
-            commit('alertMessage',true, 'alert success', 'Teste Sucesso')
+            commit('alertMessage', true, 'alert success', 'Teste Sucesso')
             //commit('updateDashboard', result.data)
             //console.log("Dashboard atualizado")
           }
-        )
-        .catch(
+        ).catch(
           error => {
             console.log(error.data)
-            commit('errorLogin', [true, 'Não foi possível realizar operação agora, tente mais tarde novamente!'])
             console.log("Error exibe: " + true + " - " + null)
           }
         )
-
-        
     },
     alertMessage({ commit }, [show, type, message]) {
-      commit('alertMessage', [show,type, message])
+      commit('alertMessage', [show, type, message])
     },
   },
   modules: {
