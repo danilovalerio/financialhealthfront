@@ -129,6 +129,7 @@ $background-color_2: #dddddd;
 }
 
 .divlancamentos {
+	background-color: white;
 			
 }
 </style>
