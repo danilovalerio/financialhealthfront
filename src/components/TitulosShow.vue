@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="divlancamentos">
     <h1>Lançamentos</h1>
     <table class="fixed_headers">
     <thead>
@@ -61,7 +61,6 @@ $background-color_2: #dddddd;
 
 .fixed_headers {
     overflow-y: auto;
-	width: 750px;
 	table-layout: fixed;
 	border-collapse: collapse;
 	th {
@@ -129,4 +128,7 @@ $background-color_2: #dddddd;
 	}
 }
 
+.divlancamentos {
+			
+}
 </style>
