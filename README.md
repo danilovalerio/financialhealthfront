@@ -43,7 +43,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 * ✓ Se não estiver logado nem exibir o menu NAV
 
 * Cadastrar Usuário novo
-  * Modal para usuario colocar informacoes e realizar cadastrar (IN PROGRESS)
+  * ✓ Modal para usuario colocar informacoes e realizar cadastrar 
+  * Adicionar o feedback para validação dos campos antes tentar cadastrar usuário (IN PROGRESS)
 * Recuperar senha (quando der)
 
 
