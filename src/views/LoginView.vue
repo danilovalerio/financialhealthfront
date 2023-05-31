@@ -192,7 +192,7 @@ export default {
             console.log("senha:" + this.registerUser.password)
             console.log("senha confirm:" + this.registerUser.passwordConfirm)
 
-            //CHAMADA da API - realiza o cadastro
+            //CHAMADA da API - realizar o cadastro
             function cadastrarUsuario() {
                 http.post('/usuarios', {
                         "email": `${this.user.login}`,
