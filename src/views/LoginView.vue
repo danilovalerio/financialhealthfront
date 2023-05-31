@@ -42,14 +42,14 @@
         </div>
         <div class="modal-body">
             <form>
-            <input type="text" class="register" id="nomeRegister" name="nomeRegister" v-model="registerUser.name" placeholder="nome">
-            <input type="text" class="register" id="loginRegister" name="loginRegister" v-model="registerUser.login" placeholder="login">
-            <input type="text" class="register" id="passwordRegister" name="passwordRegister" v-model="registerUser.password" placeholder="password">
-            <input type="text" class="register" id="passwordConfirm" name="passwordConfirm" v-model="registerUser.passwordConfirm" placeholder="confirmar password">
-        </form>
+                <input type="text" class="register" id="nomeRegister" name="nomeRegister" v-model="registerUser.name" placeholder="nome">
+                <input type="text" class="register" id="loginRegister" name="loginRegister" v-model="registerUser.login" placeholder="login">
+                <input type="text" class="register" id="passwordRegister" name="passwordRegister" v-model="registerUser.password" placeholder="password">
+                <input type="text" class="register" id="passwordConfirm" name="passwordConfirm" v-model="registerUser.passwordConfirm" placeholder="confirmar password">
+            </form>
         </div>
         <div class="modal-footer">
-            <input type="button" class="btn-secundary" v-on:click="openModalCadastro('fechar')" value="ok" />
+            <input type="button" class="btn-secundary" v-on:click="realizarCadastro()" value="ok" />
         </div>
     </div>
 
@@ -168,21 +168,96 @@ export default {
         },
 
         openModalCadastro(evento) {
-            
+
             console.log("Click funcionando...")
             var modal = document.getElementById("myModal");
 
             if (evento == 'abrir') {
-                modal.style.display = "block";   
-                this.viewModal = true             
+                modal.style.display = "block";
+                this.viewModal = true
             }
 
             if (evento == 'fechar') {
                 modal.style.display = "none";
                 this.viewModal = false
             }
-            
-        
+
+        },
+
+        realizarCadastro() {
+
+            console.log("Click realizar cadastro...")
+            console.log("nome:" + this.registerUser.name)
+            console.log("email:" + this.registerUser.login)
+            console.log("senha:" + this.registerUser.password)
+            console.log("senha confirm:" + this.registerUser.passwordConfirm)
+
+            //CHAMADA da API - realiza o cadastro
+            function cadastrarUsuario() {
+                http.post('/usuarios', {
+                        "email": `${this.user.login}`,
+                        "senha": `${this.user.password}`
+                    }, {
+                        headers: {
+                            //user: JSON.stringify(this.user),
+                            'Content-Type': 'application/json',
+                        },
+                    })
+                    .then(
+                        (result) => {
+                            this.$store.commit('successLogin', result.data)
+                            this.$router.push('/')
+                            //console.log(result.data)
+                        }
+                    )
+                    .catch(
+                        error => {
+                            try {
+                                console.log("email:" + this.user.login)
+                                console.log("senha:" + this.user.password)
+                                console.log("Usuario logado:" + this.$store.state.loggedIn)
+                                this.$store.dispatch('errorLogin', [true, error.response.data.mensagem])
+                            } catch (e) {
+                                this.$store.dispatch('errorLogin', [true, null])
+                                console.log("indefinido: " + e);
+                            }
+                        }
+                    )
+
+                var modal = document.getElementById("myModal");
+                modal.style.display = "none";
+            }
+
+            //VALIDAÇÃO DOS CAMPOS
+            function validaItem(info) {
+                if (info !== "") {
+                    return true
+                } else {
+                    return false
+                }
+            }
+
+            function validateEmail(email) {
+                var re = /\S+@\S+\.\S+/;
+                return re.test(email);
+            }
+
+            var resultado = ""
+
+            Object.values(this.registerUser).forEach((item) => {
+                resultado += " " + validaItem(item)
+            })
+
+            if (resultado.includes("false")) {
+                console.log("Erro - Preencha todos os campos.")
+            } else if (this.registerUser.password !== this.registerUser.passwordConfirm) {
+                console.log("Erro - Senhas divergentes, verifique os valores e tente novamente.")
+            } else if (validateEmail(this.registerUser.email)) {
+                console.log("Erro - e-amil inválido.")
+            } else {
+                console.log("Cadastrar usuário...")
+                cadastrarUsuario()
+            }
         },
     }
 }
