@@ -30,7 +30,6 @@
 </div>
 
 <LoginError />
-<ModalMessage v-if="viewModal" />
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
@@ -39,14 +38,17 @@
     <div class="modal-content">
         <div class="modal-header">
             <span class="close" v-on:click="openModalCadastro('fechar')">&times;</span>
-            <h2>Modal Header</h2>
+            <h2 class="modalh2">Cadastrar novo usuário</h2>
         </div>
         <div class="modal-body">
-            <p>Some text in the Modal Body</p>
-            <p>Some other text...</p>
+            <form>
+            <input type="text" class="register" id="nomeRegister" name="nomeRegister" v-model="registerUser.name" placeholder="nome">
+            <input type="text" class="register" id="loginRegister" name="loginRegister" v-model="registerUser.login" placeholder="login">
+            <input type="text" class="register" id="passwordRegister" name="passwordRegister" v-model="registerUser.password" placeholder="password">
+            <input type="text" class="register" id="passwordConfirm" name="passwordConfirm" v-model="registerUser.passwordConfirm" placeholder="confirmar password">
+        </form>
         </div>
         <div class="modal-footer">
-            <h3>Modal Footer</h3>
             <input type="button" class="btn-secundary" v-on:click="openModalCadastro('fechar')" value="ok" />
         </div>
     </div>
@@ -57,14 +59,12 @@
 <script>
 import http from "../http-commons"
 import LoginError from "@/components/LoginError.vue"
-import ModalMessage from "@/components/ModalMessage.vue"
 
 export default {
 
     name: 'LoginPage',
     components: {
         LoginError,
-        ModalMessage
     },
 
     data() {
@@ -72,6 +72,12 @@ export default {
             user: {
                 login: "danilo@testenovo.com",
                 password: "123456"
+            },
+            registerUser: {
+                name: "",
+                login: "",
+                password: "",
+                passwordConfirm: ""
             },
             viewModal: false
         }
@@ -185,6 +191,7 @@ export default {
 <style lang="scss">
 @import '../styles/buttons.scss';
 @import '../styles/typography.scss';
+@import '../styles/modal.scss';
 
 html {
     background-color: #fff;
@@ -203,14 +210,14 @@ a {
     font-weight: 400;
 }
 
-h2 {
+.modalh2 {
     text-align: center;
     font-size: 16px;
     font-weight: 600;
     text-transform: uppercase;
     display: inline-block;
     margin: 40px 8px 10px 8px;
-    color: #cccccc;
+    color: white;
 }
 
 /* STRUCTURE */
@@ -458,100 +465,25 @@ input[type=text]:placeholder {
     color: black;
 }
 
-/* CODIGO DO MODAL */
-
-/* The Modal (background) */
-.modal {
-    display: none;
-    /* Hidden by default */
-    position: fixed;
-    /* Stay in place */
-    z-index: 1;
-    /* Sit on top */
-    padding-top: 100px;
-    /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%;
-    /* Full width */
-    height: 100%;
-    /* Full height */
-    overflow: auto;
-    /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0);
-    /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4);
-    /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal-content {
-    position: relative;
-    background-color: #fefefe;
-    margin: auto;
-    padding: 0;
-    border: 1px solid #888;
-    width: 80%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
-    animation-duration: 0.4s
-}
-
-/* Add Animation */
-@-webkit-keyframes animatetop {
-    from {
-        top: -300px;
-        opacity: 0
-    }
-
-    to {
-        top: 0;
-        opacity: 1
-    }
-}
-
-@keyframes animatetop {
-    from {
-        top: -300px;
-        opacity: 0
-    }
-
-    to {
-        top: 0;
-        opacity: 1
-    }
-}
-
-/* The Close Button */
-.close {
-    color: white;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: #000;
+/* Customizados */
+input.register {
+    text-align: left;
+    background-color: white;
+    border: none;
+    color: #676767;
+    padding: 15px 15px;
+    margin: 5px;
     text-decoration: none;
-    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    width: 88%;
+    border: 2px solid #f6f6f6;
+    transition: all 0.5s ease-in-out;
+    border-radius: 5px;
+
 }
 
-.modal-header {
-    padding: 2px 16px;
-    background-color: #5cb85c;
-    color: white;
-}
-
-.modal-body {
-    padding: 2px 16px;
-}
-
-.modal-footer {
-    padding: 2px 16px;
-    background-color: #5cb85c;
-    color: white;
+input.btn-secundary {
+    margin: 5px 20px 7px 20px;
 }
 </style>

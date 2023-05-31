@@ -42,6 +42,10 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 * Editar Título a partir do form
 * ✓ Se não estiver logado nem exibir o menu NAV
 
+* Cadastrar Usuário novo
+  * Modal para usuario colocar informacoes e realizar cadastrar (IN PROGRESS)
+* Recuperar senha (quando der)
+
 
 ### LoginView
 - Cadastrar: realizar o cadastro passando os dados necessários
